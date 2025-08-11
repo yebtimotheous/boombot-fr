@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="0" height="0" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <style>
+      .lbl { fill:#ffffff; font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-weight:700; text-anchor:middle; dominant-baseline:middle; }
+      .bg { fill: none; }
+    </style>
+
+    <!-- Generic 24x24 content inside 32x32 viewbox; center at (16,16) -->
+    <symbol id="evm" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="12">EVM</text>
+    </symbol>
+
+    <symbol id="hardhat" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="11">HARD</text>
+    </symbol>
+
+    <symbol id="uniswap" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="11">UNI</text>
+    </symbol>
+
+    <symbol id="eth" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="12">ETH</text>
+    </symbol>
+
+    <symbol id="oss" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="12">OSS</text>
+    </symbol>
+
+    <symbol id="pm2" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="12">PM2</text>
+    </symbol>
+
+    <symbol id="chainlink" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="10">LINK</text>
+    </symbol>
+
+    <symbol id="web3js" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="10">WEB3</text>
+    </symbol>
+
+    <symbol id="docker" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="10">DOCK</text>
+    </symbol>
+
+    <symbol id="redis" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="12">REDIS</text>
+    </symbol>
+
+    <symbol id="nodejs" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="10">NODE</text>
+    </symbol>
+
+    <symbol id="mongodb" viewBox="0 0 32 32">
+      <rect class="bg" x="0" y="0" width="32" height="32" rx="6"/>
+      <text class="lbl" x="16" y="17" font-size="10">MDB</text>
+    </symbol>
+  </defs>
+</svg>

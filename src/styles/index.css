@@ -1,0 +1,25 @@
+/* Import legacy CSS enhancements from the original static site */
+@import './legacy.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Project global styles */
+:root {
+  --ex-900: #0b0e11;
+  --ex-800: #161a1e;
+  --ex-700: #1e2329;
+  --ex-600: #2b3139;
+  --ex-500: #474d57;
+  --primary-500: #f0b90b;
+  --primary-400: #fcd535;
+  --success-500: #02c076;
+  --danger-500: #f84960;
+  --info-500: #1e96fc;
+}
+
+/* Ensure background color aligns before Tailwind loads */
+html, body {
+  background: var(--ex-900);
+}
+

@@ -1,29 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useLucide } from '../hooks/useLucide';
+import React, { useState } from 'react';
 
 const Footer: React.FC = () => {
-  useLucide();
   const [status, setStatus] = useState<string>("");
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [networkStats, setNetworkStats] = useState({
-    nodes: 847,
-    transactions: 2847392,
-    uptime: 99.97
-  });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-      // Simulate live network stats
-      setNetworkStats(prev => ({
-        nodes: prev.nodes + Math.floor(Math.random() * 3) - 1,
-        transactions: prev.transactions + Math.floor(Math.random() * 50) + 10,
-        uptime: 99.97 + (Math.random() * 0.02)
-      }));
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   function onSubscribe(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,242 +12,190 @@ const Footer: React.FC = () => {
     try {
       localStorage.setItem('boombot_newsletter_email', email);
     } catch { }
-    setStatus("Neural network activated! You're in the loop.");
+    setStatus("Successfully subscribed to BoomBot updates!");
     form.reset();
+    setTimeout(() => setStatus(""), 3000);
   }
 
   return (
-    <footer className="relative overflow-hidden">
-      {/* Revolutionary background with animated matrix */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-exchange-900 to-exchange-800"></div>
+    <footer className="bg-gradient-to-t from-black via-exchange-900 to-exchange-800 border-t border-exchange-700/30">
+      <div className="max-w-7xl mx-auto px-6 py-20">
 
-        {/* Simplified matrix effect */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="grid grid-cols-12 gap-1 h-full">
-            {[...Array(48)].map((_, i) => (
-              <div
-                key={i}
-                className="flex flex-col justify-start space-y-2 animate-pulse"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                {[...Array(10)].map((_, j) => (
-                  <span
-                    key={j}
-                    className="text-primary-500 font-mono text-xs opacity-30"
-                  >
-                    {Math.random() > 0.5 ? '1' : '0'}
-                  </span>
-                ))}
-              </div>
-            ))}
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-16 relative">
+
+          {/* Vertical Dividers - Hidden on mobile, visible on desktop */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none">
+            {/* First divider between Brand and Product */}
+            <div className="absolute left-1/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-exchange-600/30 to-transparent"></div>
+            {/* Second divider between Product and Resources */}
+            <div className="absolute left-2/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-exchange-600/30 to-transparent"></div>
+            {/* Third divider between Resources and Newsletter */}
+            <div className="absolute left-3/4 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-exchange-600/30 to-transparent"></div>
           </div>
-        </div>
 
-        {/* Floating neural nodes */}
-        <div className="absolute inset-0">
-          {[...Array(15)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-2 h-2 bg-primary-400 rounded-full opacity-30 animate-pulse"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 2}s`
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-6 py-16">
-        {/* Revolutionary header section */}
-        <div className="mb-16 text-center">
-          <div className="inline-flex items-center space-x-3 mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-500 via-success-500 to-info-500 rounded-2xl blur-lg opacity-60 animate-pulse"></div>
-              <div className="relative bg-gradient-to-br from-exchange-800 to-exchange-900 rounded-2xl p-4 border border-primary-500/30">
-                <img src="/img/logo.png" alt="BoomBot Logo" className="h-12 w-12" />
+          {/* Brand Section */}
+          <div className="lg:col-span-1 space-y-8">
+            <div className="flex items-center mb-8">
+              <img src="/assets/img/logo.png" alt="BoomBot" className="h-12 w-12 mr-4" />
+              <div>
+                <h3 className="text-2xl font-bold text-white">BoomBot</h3>
+                <p className="text-sm text-gray-400 mt-1">Neural Trading AI</p>
               </div>
             </div>
-            <div>
-              <h2 className="font-display text-3xl font-black bg-gradient-to-r from-white via-primary-200 to-white bg-clip-text text-transparent">
-                BoomBot Neural Network
-              </h2>
-              <p className="text-sm text-gray-400">Quantum-Enhanced Trading Infrastructure</p>
-            </div>
-          </div>
 
-          {/* Live network status */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto mb-12">
-            <div className="bg-exchange-800/40 backdrop-blur-xl rounded-2xl p-4 border border-primary-500/20">
-              <div className="text-2xl font-black font-mono text-primary-400">{networkStats.nodes}</div>
-              <div className="text-xs text-gray-400 font-medium">Active Nodes</div>
-            </div>
-            <div className="bg-exchange-800/40 backdrop-blur-xl rounded-2xl p-4 border border-success-500/20">
-              <div className="text-2xl font-black font-mono text-success-400">{networkStats.transactions.toLocaleString()}</div>
-              <div className="text-xs text-gray-400 font-medium">Transactions</div>
-            </div>
-            <div className="bg-exchange-800/40 backdrop-blur-xl rounded-2xl p-4 border border-info-500/20">
-              <div className="text-2xl font-black font-mono text-info-400">{networkStats.uptime.toFixed(2)}%</div>
-              <div className="text-xs text-gray-400 font-medium">Uptime</div>
-            </div>
-          </div>
-        </div>
+            <div className="h-px bg-gradient-to-r from-primary-500/50 via-success-500/30 to-transparent"></div>
 
-        {/* Main footer content */}
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
-          {/* Neural Command Center */}
-          <div className="lg:col-span-2">
-            <div className="bg-gradient-to-br from-exchange-800/60 to-exchange-900/60 backdrop-blur-xl rounded-3xl p-8 border border-exchange-600/30">
-              <h3 className="font-display text-xl font-bold text-white mb-4 flex items-center">
-                <div className="w-3 h-3 bg-success-500 rounded-full animate-pulse mr-3"></div>
-                Neural Command Center
-              </h3>
-
-              <p className="text-gray-300 mb-6 leading-relaxed">
-                Join the quantum revolution in autonomous trading. Our neural network processes millions of market signals
-                to deliver unprecedented trading performance.
-              </p>
-
-              {/* Revolutionary social links with custom SVGs */}
-              <div className="flex space-x-4 mb-6">
-                <a href="#" className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-400 rounded-xl blur opacity-0 group-hover:opacity-60 transition-opacity"></div>
-                  <div className="relative bg-exchange-700/50 rounded-xl p-3 border border-exchange-600/50 group-hover:border-blue-500/50 transition-colors">
-                    <svg className="h-5 w-5 text-gray-400 group-hover:text-blue-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </div>
-                </a>
-
-                <a href="#" className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-500 to-gray-400 rounded-xl blur opacity-0 group-hover:opacity-60 transition-opacity"></div>
-                  <div className="relative bg-exchange-700/50 rounded-xl p-3 border border-exchange-600/50 group-hover:border-gray-500/50 transition-colors">
-                    <svg className="h-5 w-5 text-gray-400 group-hover:text-gray-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                    </svg>
-                  </div>
-                </a>
-
-                <a href="#" className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-400 rounded-xl blur opacity-0 group-hover:opacity-60 transition-opacity"></div>
-                  <div className="relative bg-exchange-700/50 rounded-xl p-3 border border-exchange-600/50 group-hover:border-purple-500/50 transition-colors">
-                    <svg className="h-5 w-5 text-gray-400 group-hover:text-purple-400 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0190 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z" />
-                    </svg>
-                  </div>
-                </a>
-
-                <a href="#" className="group relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl blur opacity-0 group-hover:opacity-60 transition-opacity"></div>
-                  <div className="relative bg-exchange-700/50 rounded-xl p-3 border border-exchange-600/50 group-hover:border-blue-600/50 transition-colors">
-                    <svg className="h-5 w-5 text-gray-400 group-hover:text-blue-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
-
-              {/* Live system time */}
-              <div className="bg-exchange-700/30 rounded-xl p-4 border border-exchange-600/30">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-400 font-mono">System Time (UTC)</span>
-                  <span className="text-sm font-mono text-primary-400">
-                    {currentTime.toISOString().slice(0, 19).replace('T', ' ')}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="space-y-8">
-            <div className="bg-exchange-800/40 backdrop-blur-xl rounded-2xl p-6 border border-exchange-600/30">
-              <h3 className="font-display text-lg font-bold text-primary-400 mb-4">Neural Modules</h3>
-              <ul className="space-y-3">
-                <li><a href="#features" className="text-sm text-gray-400 hover:text-primary-400 transition-colors flex items-center"><span className="mr-2">→</span>AI Engine</a></li>
-                <li><a href="#how" className="text-sm text-gray-400 hover:text-primary-400 transition-colors flex items-center"><span className="mr-2">→</span>Execution Pipeline</a></li>
-                <li><a href="/analytics.html" className="text-sm text-gray-400 hover:text-primary-400 transition-colors flex items-center"><span className="mr-2">→</span>Analytics Core</a></li>
-                <li><a href="/setting.html" className="text-sm text-gray-400 hover:text-primary-400 transition-colors flex items-center"><span className="mr-2">→</span>Control Panel</a></li>
-              </ul>
-            </div>
-
-            <div className="bg-exchange-800/40 backdrop-blur-xl rounded-2xl p-6 border border-exchange-600/30">
-              <h3 className="font-display text-lg font-bold text-success-400 mb-4">Knowledge Base</h3>
-              <ul className="space-y-3">
-                <li><a href="../WHITEPAPER.md" className="text-sm text-gray-400 hover:text-success-400 transition-colors flex items-center"><span className="mr-2">→</span>Neural Whitepaper</a></li>
-                <li><a href="#" className="text-sm text-gray-400 hover:text-success-400 transition-colors flex items-center"><span className="mr-2">→</span>API Documentation</a></li>
-                <li><a href="https://github.com" className="text-sm text-gray-400 hover:text-success-400 transition-colors flex items-center"><span className="mr-2">→</span>Source Code</a></li>
-                <li><a href="#" className="text-sm text-gray-400 hover:text-success-400 transition-colors flex items-center"><span className="mr-2">→</span>Integration Guide</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Neural Newsletter */}
-          <div className="bg-gradient-to-br from-exchange-800/60 to-exchange-900/60 backdrop-blur-xl rounded-3xl p-8 border border-exchange-600/30">
-            <h3 className="font-display text-xl font-bold text-info-400 mb-4 flex items-center">
-              <div className="w-3 h-3 bg-info-500 rounded-full animate-pulse mr-3"></div>
-              Neural Updates
-            </h3>
-
-            <p className="text-gray-300 mb-6 text-sm leading-relaxed">
-              Subscribe to receive quantum-encrypted updates about our neural network evolution and trading breakthroughs.
+            <p className="text-gray-300 text-sm leading-relaxed">
+              Advanced AI-powered trading bot that leverages neural networks to analyze market patterns and execute profitable trades automatically.
             </p>
 
-            <form className="space-y-4" onSubmit={onSubscribe}>
-              <div className="relative">
-                <input
-                  type="email"
-                  required
-                  placeholder="neural.address@quantum.net"
-                  className="w-full rounded-xl border border-exchange-600/50 bg-exchange-700/30 px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-info-500/50 focus:border-info-500/50 font-mono"
-                />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-info-500/10 to-transparent opacity-0 focus-within:opacity-100 transition-opacity pointer-events-none"></div>
-              </div>
+            <div className="h-px bg-gradient-to-r from-transparent via-exchange-600/50 to-transparent"></div>
 
+            {/* Social Links */}
+            <div className="flex space-x-6">
+              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-exchange-800/50">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-exchange-800/50">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-exchange-800/50">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0190 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z" />
+                </svg>
+              </a>
+              <a href="#" className="text-gray-400 hover:text-primary-400 transition-colors p-2 rounded-lg hover:bg-exchange-800/50">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+                </svg>
+              </a>
+            </div>
+
+            {/* Mobile divider - only visible on mobile */}
+            <div className="block md:hidden h-px bg-gradient-to-r from-transparent via-exchange-600/50 to-transparent mt-8"></div>
+          </div>
+
+          {/* Product Links */}
+          <div className="space-y-6 relative">
+            <h4 className="text-lg font-semibold text-white mb-6 relative">
+              Product
+              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-primary-500 to-success-500"></div>
+            </h4>
+
+            <div className="h-px bg-gradient-to-r from-primary-500/30 via-transparent to-transparent mb-4"></div>
+
+            <ul className="space-y-4">
+              <li><a href="#features" className="text-gray-400 hover:text-primary-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-primary-500/50 pl-3 hover:pl-4 transition-all">Features</a></li>
+              <li><a href="#how" className="text-gray-400 hover:text-primary-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-primary-500/50 pl-3 hover:pl-4 transition-all">How It Works</a></li>
+              <li><a href="/analytics.html" className="text-gray-400 hover:text-primary-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-primary-500/50 pl-3 hover:pl-4 transition-all">Analytics</a></li>
+              <li><a href="/setting.html" className="text-gray-400 hover:text-primary-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-primary-500/50 pl-3 hover:pl-4 transition-all">Settings</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-primary-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-primary-500/50 pl-3 hover:pl-4 transition-all">API</a></li>
+            </ul>
+
+            {/* Mobile divider - only visible on mobile */}
+            <div className="block md:hidden h-px bg-gradient-to-r from-transparent via-exchange-600/50 to-transparent mt-8"></div>
+          </div>
+
+          {/* Resources */}
+          <div className="space-y-6 relative">
+            <h4 className="text-lg font-semibold text-white mb-6 relative">
+              Resources
+              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-success-500 to-info-500"></div>
+            </h4>
+
+            <div className="h-px bg-gradient-to-r from-success-500/30 via-transparent to-transparent mb-4"></div>
+
+            <ul className="space-y-4">
+              <li><a href="../WHITEPAPER.md" className="text-gray-400 hover:text-success-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-success-500/50 pl-3 hover:pl-4 transition-all">Whitepaper</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-success-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-success-500/50 pl-3 hover:pl-4 transition-all">Documentation</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-success-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-success-500/50 pl-3 hover:pl-4 transition-all">Tutorials</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-success-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-success-500/50 pl-3 hover:pl-4 transition-all">Blog</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-success-400 transition-colors text-sm block py-1 border-l-2 border-transparent hover:border-success-500/50 pl-3 hover:pl-4 transition-all">Support</a></li>
+            </ul>
+
+            {/* Mobile divider - only visible on mobile */}
+            <div className="block md:hidden h-px bg-gradient-to-r from-transparent via-exchange-600/50 to-transparent mt-8"></div>
+          </div>
+
+          {/* Newsletter */}
+          <div className="space-y-6 relative">
+            <h4 className="text-lg font-semibold text-white mb-6 relative">
+              Stay Updated
+              <div className="absolute -bottom-2 left-0 w-12 h-0.5 bg-gradient-to-r from-info-500 to-primary-500"></div>
+            </h4>
+
+            <div className="h-px bg-gradient-to-r from-info-500/30 via-transparent to-transparent mb-4"></div>
+
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Get the latest updates on BoomBot features and market insights.
+            </p>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-exchange-600/50 to-transparent"></div>
+
+            <form onSubmit={onSubscribe} className="space-y-4">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-4 py-3 bg-exchange-800/50 border border-exchange-600/50 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary-500/50 focus:ring-1 focus:ring-primary-500/50 transition-colors text-sm"
+                required
+              />
               <button
                 type="submit"
-                className="w-full relative group"
+                className="w-full py-3 bg-gradient-to-r from-primary-500 to-success-500 text-black font-medium rounded-lg hover:from-primary-400 hover:to-success-400 transition-all duration-300 text-sm shadow-lg hover:shadow-primary-500/25"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-info-500 to-primary-500 rounded-xl blur opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                <div className="relative bg-gradient-to-r from-info-500 to-primary-500 rounded-xl px-4 py-3 text-sm font-bold text-black font-mono">
-                  ACTIVATE NEURAL LINK
-                </div>
+                Subscribe
               </button>
-
-              {status && (
-                <div className="bg-success-500/10 border border-success-500/30 rounded-xl p-3">
-                  <div className="text-xs text-success-400 font-mono">{status}</div>
-                </div>
-              )}
             </form>
+
+            {status && (
+              <div className="mt-4 p-3 bg-success-500/10 border border-success-500/30 rounded-lg">
+                <div className="text-xs text-success-400">
+                  {status}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Revolutionary bottom section */}
-        <div className="mt-16 pt-8 border-t border-exchange-700/30">
-          <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+        {/* Separator Line */}
+        <div className="mb-12">
+          <div className="h-px bg-gradient-to-r from-transparent via-exchange-600/50 to-transparent"></div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="pt-8 border-t border-exchange-700/30">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <div className="text-sm text-gray-500">
-              © {new Date().getFullYear()} BoomBot Neural Network. All quantum rights reserved.
+              © {new Date().getFullYear()} BoomBot. All rights reserved.
             </div>
 
-            <div className="flex items-center space-x-6">
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Neural Privacy</a>
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Quantum Terms</a>
-              <a href="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">AI Ethics</a>
+            <div className="flex items-center space-x-8 text-sm text-gray-500">
+              <a href="#" className="hover:text-gray-300 transition-colors relative group">
+                Privacy Policy
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></div>
+              </a>
+              <a href="#" className="hover:text-gray-300 transition-colors relative group">
+                Terms of Service
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></div>
+              </a>
+              <a href="#" className="hover:text-gray-300 transition-colors relative group">
+                Cookie Policy
+                <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 group-hover:w-full transition-all duration-300"></div>
+              </a>
             </div>
 
-            <div className="flex items-center space-x-2 text-xs text-gray-500">
+            <div className="flex items-center space-x-3 text-sm text-gray-500">
               <div className="w-2 h-2 bg-success-500 rounded-full animate-pulse"></div>
-              <span>Neural Network: ACTIVE</span>
+              <span>System Online</span>
             </div>
           </div>
         </div>
       </div>
-
-
     </footer>
   );
 };

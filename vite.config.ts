@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true,
-    proxy: {
+    proxy: process.env.VITE_DISABLE_API === 'true' ? {} : {
       '/performance-metrics': {
         target: 'http://localhost:3000',
         changeOrigin: true,

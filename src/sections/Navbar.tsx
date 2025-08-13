@@ -35,10 +35,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4">
           <a href="#" className="flex items-center space-x-3 group">
             <div className="relative">
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary-500/30 to-info-500/20 blur opacity-70"></div>
-              <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-exchange-800 to-exchange-900 border border-exchange-700 shadow-lg">
-                <img src="/img/logo.svg" alt="BoomBot Logo" className="h-7 w-7" />
-              </div>
+              <img src="/img/logo.png" alt="BoomBot Logo" className="h-10 w-10" />
             </div>
             <div className="flex flex-col">
               <span className="font-display text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">BoomBot</span>

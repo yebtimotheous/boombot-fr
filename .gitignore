@@ -106,6 +106,7 @@ Thumbs.db
 # Temporary folders
 tmp/
 temp/
+.crush/
 
 # Backup files
 *.bak

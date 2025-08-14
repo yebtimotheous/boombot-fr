@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLucide } from '../hooks/useLucide';
 
-type PartnerTier = 'quantum' | 'neural' | 'core';
+type PartnerTier = 'enterprise' | 'neural' | 'core';
 
 type LogoItem = {
   kind: 'img' | 'symbol' | 'custom';
@@ -15,8 +15,8 @@ type LogoItem = {
 };
 
 const techs: LogoItem[] = [
-  { kind: 'img', label: 'Ethereum', src: '/partners/ethereum.svg', tier: 'quantum', status: 'verified', connections: 2847, description: 'Layer 1 Blockchain' },
-  { kind: 'custom', label: 'Solana', tier: 'quantum', status: 'active', connections: 1923, description: 'High-Speed Blockchain' },
+  { kind: 'img', label: 'Ethereum', src: '/partners/ethereum.svg', tier: 'enterprise', status: 'verified', connections: 2847, description: 'Layer 1 Blockchain' },
+  { kind: 'custom', label: 'Solana', tier: 'enterprise', status: 'active', connections: 1923, description: 'High-Speed Blockchain' },
   { kind: 'img', label: 'Chainlink', src: '/partners/chainlink.svg', tier: 'neural', status: 'verified', connections: 1456, description: 'Oracle Network' },
   { kind: 'img', label: 'Node.js', src: '/partners/nodedotjs.svg', tier: 'core', status: 'active', connections: 892, description: 'Runtime Engine' },
   { kind: 'img', label: 'Docker', src: '/partners/docker.svg', tier: 'core', status: 'verified', connections: 743, description: 'Containerization' },
@@ -34,7 +34,7 @@ const Partners: React.FC = () => {
 
   const getTierColor = (tier: PartnerTier) => {
     switch (tier) {
-      case 'quantum': return 'from-primary-500 to-info-500';
+      case 'enterprise': return 'from-primary-500 to-info-500';
       case 'neural': return 'from-success-500 to-primary-500';
       case 'core': return 'from-warning-500 to-success-500';
     }
@@ -111,7 +111,7 @@ const Partners: React.FC = () => {
           </div>
 
           <h2 className="text-5xl font-black font-mono bg-gradient-to-r from-white via-primary-200 to-white bg-clip-text text-transparent mb-6">
-            Quantum-Enhanced
+            Enterprise-Grade
             <br />
             <span className="bg-gradient-to-r from-primary-400 via-success-400 to-info-400 bg-clip-text text-transparent">
               Partner Network
@@ -119,14 +119,14 @@ const Partners: React.FC = () => {
           </h2>
 
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Our AI trading engine connects to a revolutionary ecosystem of quantum-verified protocols and neural-enhanced infrastructure
+            Our AI trading engine connects to a revolutionary ecosystem of enterprise-verified protocols and neural-enhanced infrastructure
           </p>
         </div>
 
         {/* Futuristic filter system */}
         <div className="flex justify-center mb-12">
           <div className="inline-flex bg-exchange-800/60 backdrop-blur-xl rounded-2xl p-2 border border-exchange-600/50">
-            {(['all', 'quantum', 'neural', 'core'] as const).map((filter) => (
+            {(['all', 'enterprise', 'neural', 'core'] as const).map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
@@ -147,7 +147,7 @@ const Partners: React.FC = () => {
         </div>
 
         {/* Revolutionary partner grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
           {filteredTechs.map((tech, index) => (
             <div
               key={tech.label}
@@ -159,24 +159,27 @@ const Partners: React.FC = () => {
               {/* Holographic border effect */}
               <div className={`absolute -inset-0.5 bg-gradient-to-r ${getTierColor(tech.tier)} rounded-2xl blur opacity-20 group-hover:opacity-60 transition duration-500`}></div>
 
-              <div className="relative bg-gradient-to-br from-exchange-800/90 to-exchange-900/90 rounded-2xl p-6 border border-exchange-600/30 backdrop-blur-xl h-full">
+              <div className="relative bg-gradient-to-br from-exchange-800/90 to-exchange-900/90 rounded-2xl p-3 md:p-6 border border-exchange-600/30 backdrop-blur-xl h-full">
                 {/* Status indicator */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`px-2 py-1 rounded-full text-xs font-bold ${getStatusColor(tech.status)}`}>
-                    {tech.status.toUpperCase()}
+                <div className="flex items-center justify-between mb-3 md:mb-4">
+                  <div className={`px-1.5 md:px-2 py-0.5 md:py-1 rounded-full text-xs font-bold ${getStatusColor(tech.status)}`}>
+                    <span className="hidden md:inline">{tech.status.toUpperCase()}</span>
+                    <span className="md:hidden">
+                      {tech.status === 'active' ? '●' : tech.status === 'verified' ? '✓' : '○'}
+                    </span>
                   </div>
-                  <div className="text-xs text-gray-400 font-mono">
+                  <div className="text-xs text-gray-400 font-mono hidden md:block">
                     {tech.connections.toLocaleString()} connections
                   </div>
                 </div>
 
                 {/* Logo with quantum effect */}
-                <div className="flex items-center justify-center mb-6">
+                <div className="flex items-center justify-center mb-3 md:mb-6">
                   <div className="relative">
                     <div className={`absolute inset-0 bg-gradient-to-r ${getTierColor(tech.tier)} rounded-2xl blur-lg opacity-30 group-hover:opacity-60 transition-opacity duration-500`}></div>
-                    <div className="relative bg-transparent rounded-2xl p-4 border border-exchange-600/50 group-hover:border-primary-500/50 transition-colors duration-300">
+                    <div className="relative bg-transparent rounded-2xl p-2 md:p-4 border border-exchange-600/50 group-hover:border-primary-500/50 transition-colors duration-300">
                       {tech.label === 'Solana' ? (
-                        <svg className="h-12 w-12 filter brightness-0 invert group-hover:brightness-110 transition-all duration-300" viewBox="0 0 397.7 311.7" fill="currentColor">
+                        <svg className="h-8 w-8 md:h-12 md:w-12 filter brightness-0 invert group-hover:brightness-110 transition-all duration-300" viewBox="0 0 397.7 311.7" fill="currentColor">
                           <path d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 237.9z" />
                           <path d="M64.6 3.8C67.1 1.4 70.4 0 73.8 0h317.4c5.8 0 8.7 7 4.6 11.1L333.1 73.8c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1L64.6 3.8z" />
                           <path d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z" />
@@ -185,22 +188,22 @@ const Partners: React.FC = () => {
                         <img
                           src={tech.src}
                           alt={tech.label}
-                          className="h-12 w-12 object-contain filter brightness-0 invert group-hover:brightness-110 transition-all duration-300"
+                          className="h-8 w-8 md:h-12 md:w-12 object-contain filter brightness-0 invert group-hover:brightness-110 transition-all duration-300"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.style.display = 'none';
                             const fallback = document.createElement('div');
-                            fallback.className = `h-12 w-12 rounded-xl bg-gradient-to-br ${getTierColor(tech.tier)} flex items-center justify-center text-black font-bold text-lg`;
+                            fallback.className = `h-8 w-8 md:h-12 md:w-12 rounded-xl bg-gradient-to-br ${getTierColor(tech.tier)} flex items-center justify-center text-black font-bold text-sm md:text-lg`;
                             fallback.textContent = tech.label.charAt(0);
                             target.parentElement!.appendChild(fallback);
                           }}
                         />
                       ) : tech.kind === 'symbol' && tech.id ? (
-                        <svg className="h-12 w-12 filter group-hover:brightness-110 transition-all duration-300" role="img" aria-label={tech.label}>
+                        <svg className="h-8 w-8 md:h-12 md:w-12 filter group-hover:brightness-110 transition-all duration-300" role="img" aria-label={tech.label}>
                           <use href={`/partners/brands.svg#${tech.id}`} />
                         </svg>
                       ) : (
-                        <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${getTierColor(tech.tier)} flex items-center justify-center text-black font-bold text-lg`}>
+                        <div className={`h-8 w-8 md:h-12 md:w-12 rounded-xl bg-gradient-to-br ${getTierColor(tech.tier)} flex items-center justify-center text-black font-bold text-sm md:text-lg`}>
                           {tech.label.charAt(0)}
                         </div>
                       )}
@@ -209,19 +212,20 @@ const Partners: React.FC = () => {
                 </div>
 
                 {/* Partner info */}
-                <div className="text-center space-y-2">
-                  <h3 className="font-bold text-white text-lg group-hover:text-primary-300 transition-colors">
+                <div className="text-center space-y-1 md:space-y-2">
+                  <h3 className="font-bold text-white text-sm md:text-lg group-hover:text-primary-300 transition-colors">
                     {tech.label}
                   </h3>
-                  <p className="text-sm text-gray-400 font-mono">
+                  <p className="text-xs md:text-sm text-gray-400 font-mono hidden md:block">
                     {tech.description}
                   </p>
                 </div>
 
                 {/* Tier indicator */}
-                <div className="mt-4 flex justify-center">
-                  <div className={`px-3 py-1 rounded-full bg-gradient-to-r ${getTierColor(tech.tier)} text-black text-xs font-bold`}>
-                    {tech.tier.toUpperCase()} TIER
+                <div className="mt-2 md:mt-4 flex justify-center">
+                  <div className={`px-2 md:px-3 py-0.5 md:py-1 rounded-full bg-gradient-to-r ${getTierColor(tech.tier)} text-black text-xs font-bold`}>
+                    <span className="hidden md:inline">{tech.tier.toUpperCase()} TIER</span>
+                    <span className="md:hidden">{tech.tier.charAt(0).toUpperCase()}</span>
                   </div>
                 </div>
 

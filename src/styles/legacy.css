@@ -177,6 +177,37 @@ html, body {
   margin-top: 0.5rem;
 }
 
+/* ===== Enhanced glass card effect ===== */
+.glass-card {
+  background: linear-gradient(180deg, rgba(30,35,41,.4), rgba(22,26,30,.6));
+  border: 1px solid rgba(75,77,87,.3);
+  border-radius: 16px;
+  transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgba(240,185,11,.22), rgba(30,150,252,.12));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(240,185,11,.4);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,.3);
+}
+
 /* Pricing */
 .price-card {
   background: linear-gradient(180deg, rgba(30,35,41,.55), rgba(22,26,30,.92));

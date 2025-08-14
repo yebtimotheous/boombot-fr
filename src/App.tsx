@@ -5,7 +5,6 @@ import Liquidity from './sections/Liquidity';
 import Partners from './sections/Partners';
 import Features from './sections/Features';
 import HowItWorks from './sections/HowItWorks';
-import Metrics from './sections/Metrics';
 import Pricing from './sections/Pricing';
 import CTA from './sections/CTA';
 import Footer from './sections/Footer';
@@ -38,7 +37,6 @@ function App(): JSX.Element {
         <Partners />
         <Features />
         <HowItWorks />
-        <Metrics />
         <Pricing />
         <CTA />
       </main>
